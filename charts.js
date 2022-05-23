@@ -14,7 +14,7 @@ function init() {
         .property("value", sample);
     });
 
-    // Use the first sample from the list to build the initial plots
+//     // Use the first sample from the list to build the initial plots
     var firstSample = sampleNames[0];
     buildCharts(firstSample);
     buildMetadata(firstSample);
@@ -27,9 +27,7 @@ init();
 function optionChanged(newSample) {
   // Fetch new data each time a new sample is selected
   buildMetadata(newSample);
-  buildCharts(newSample);
-  d3.selectAll("#dropdownMenu").on("change", updatePlotly);
-  
+  buildCharts(newSample); 
 }
 
 // Demographics Panel 
@@ -44,7 +42,7 @@ function buildMetadata(sample) {
 
     // Use `.html("") to clear any existing metadata
     PANEL.html("");
-    
+
     // Use `Object.entries` to add each key and value pair to the panel
     // Hint: Inside the loop, you will need to use d3 to append new
     // tags for each key-value in the metadata.
@@ -66,6 +64,12 @@ function buildCharts(sample) {
     // 4. Create a variable that filters the samples for the object with the desired sample number.
     var selectedIdSamples = samplesArray.filter(data => data.id == sample);
     console.log(selectedIdSamples);
+
+    // 1. Create a variable that filters the metadata array for the object with the desired sample number.
+    var metadata_SelId = data.metadata.filter(data => data.id == sample);
+    console.log(metadata_SelId);  
+
+    
     //  5. Create a variable that holds the first sample in the array.
     var firstSample = selectedIdSamples[0];
     console.log(firstSample);
@@ -144,7 +148,7 @@ function buildCharts(sample) {
     // 3. Use Plotly to plot the data with the layout.
     Plotly.newPlot("bubble", bubbleData, bubbleLayout, {responsive: true});
 
-    // 1. Create a variable that filters the metadata array for the object with the desired sample number.
+    // Create a variable that filters the metadata array for the object with the desired sample number.
     var metadata_SelId = data.metadata.filter(data => data.id == sample);
     console.log(metadata_SelId);  
 
